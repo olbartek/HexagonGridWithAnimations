@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EB7B54D1B9E14E100AE62E2 /* PortaitImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7B54C1B9E14E100AE62E2 /* PortaitImageView.m */; };
 		4EBAC7FA1B9DD1F000B84377 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBAC7F91B9DD1F000B84377 /* main.m */; };
 		4EBAC7FD1B9DD1F000B84377 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBAC7FC1B9DD1F000B84377 /* AppDelegate.m */; };
 		4EBAC8001B9DD1F000B84377 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBAC7FF1B9DD1F000B84377 /* ViewController.m */; };
@@ -14,6 +15,17 @@
 		4EBAC8051B9DD1F000B84377 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC8041B9DD1F000B84377 /* Images.xcassets */; };
 		4EBAC8081B9DD1F000B84377 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC8061B9DD1F000B84377 /* LaunchScreen.xib */; };
 		4EBAC8141B9DD1F000B84377 /* HexagonGridWithAnimationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBAC8131B9DD1F000B84377 /* HexagonGridWithAnimationsTests.m */; };
+		4EBAC8281B9DD27200B84377 /* janposz.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC81E1B9DD27200B84377 /* janposz.jpg */; };
+		4EBAC8291B9DD27200B84377 /* antonio.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC81F1B9DD27200B84377 /* antonio.jpg */; };
+		4EBAC82A1B9DD27200B84377 /* andrew.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC8201B9DD27200B84377 /* andrew.jpg */; };
+		4EBAC82B1B9DD27200B84377 /* mike.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC8211B9DD27200B84377 /* mike.jpg */; };
+		4EBAC82C1B9DD27200B84377 /* agajucha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC8221B9DD27200B84377 /* agajucha.jpg */; };
+		4EBAC82D1B9DD27200B84377 /* simon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC8231B9DD27200B84377 /* simon.jpg */; };
+		4EBAC82E1B9DD27200B84377 /* bart.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC8241B9DD27200B84377 /* bart.jpg */; };
+		4EBAC82F1B9DD27200B84377 /* aparcik.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC8251B9DD27200B84377 /* aparcik.jpg */; };
+		4EBAC8301B9DD27200B84377 /* bartosz.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC8261B9DD27200B84377 /* bartosz.jpg */; };
+		4EBAC8311B9DD27200B84377 /* blazej.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAC8271B9DD27200B84377 /* blazej.jpg */; };
+		4EBAC8341B9DD28500B84377 /* HexagonGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EBAC8331B9DD28500B84377 /* HexagonGrid.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4EB7B54B1B9E14E100AE62E2 /* PortaitImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortaitImageView.h; sourceTree = "<group>"; };
+		4EB7B54C1B9E14E100AE62E2 /* PortaitImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortaitImageView.m; sourceTree = "<group>"; };
 		4EBAC7F41B9DD1F000B84377 /* HexagonGridWithAnimations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HexagonGridWithAnimations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBAC7F81B9DD1F000B84377 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EBAC7F91B9DD1F000B84377 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -40,6 +54,18 @@
 		4EBAC80D1B9DD1F000B84377 /* HexagonGridWithAnimationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HexagonGridWithAnimationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBAC8121B9DD1F000B84377 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EBAC8131B9DD1F000B84377 /* HexagonGridWithAnimationsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HexagonGridWithAnimationsTests.m; sourceTree = "<group>"; };
+		4EBAC81E1B9DD27200B84377 /* janposz.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = janposz.jpg; sourceTree = "<group>"; };
+		4EBAC81F1B9DD27200B84377 /* antonio.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = antonio.jpg; sourceTree = "<group>"; };
+		4EBAC8201B9DD27200B84377 /* andrew.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = andrew.jpg; sourceTree = "<group>"; };
+		4EBAC8211B9DD27200B84377 /* mike.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mike.jpg; sourceTree = "<group>"; };
+		4EBAC8221B9DD27200B84377 /* agajucha.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = agajucha.jpg; sourceTree = "<group>"; };
+		4EBAC8231B9DD27200B84377 /* simon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = simon.jpg; sourceTree = "<group>"; };
+		4EBAC8241B9DD27200B84377 /* bart.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bart.jpg; sourceTree = "<group>"; };
+		4EBAC8251B9DD27200B84377 /* aparcik.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = aparcik.jpg; sourceTree = "<group>"; };
+		4EBAC8261B9DD27200B84377 /* bartosz.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bartosz.jpg; sourceTree = "<group>"; };
+		4EBAC8271B9DD27200B84377 /* blazej.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blazej.jpg; sourceTree = "<group>"; };
+		4EBAC8321B9DD28500B84377 /* HexagonGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexagonGrid.h; sourceTree = "<group>"; };
+		4EBAC8331B9DD28500B84377 /* HexagonGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexagonGrid.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +86,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EB7B54A1B9E14C900AE62E2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4EB7B54B1B9E14E100AE62E2 /* PortaitImageView.h */,
+				4EB7B54C1B9E14E100AE62E2 /* PortaitImageView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		4EBAC7EB1B9DD1F000B84377 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +116,9 @@
 		4EBAC7F61B9DD1F000B84377 /* HexagonGridWithAnimations */ = {
 			isa = PBXGroup;
 			children = (
+				4EB7B54A1B9E14C900AE62E2 /* Views */,
+				4EBAC8351B9DD28D00B84377 /* Hexagon Grid */,
+				4EBAC81D1B9DD26300B84377 /* images */,
 				4EBAC7FB1B9DD1F000B84377 /* AppDelegate.h */,
 				4EBAC7FC1B9DD1F000B84377 /* AppDelegate.m */,
 				4EBAC7FE1B9DD1F000B84377 /* ViewController.h */,
@@ -117,6 +155,32 @@
 				4EBAC8121B9DD1F000B84377 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4EBAC81D1B9DD26300B84377 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				4EBAC81E1B9DD27200B84377 /* janposz.jpg */,
+				4EBAC81F1B9DD27200B84377 /* antonio.jpg */,
+				4EBAC8201B9DD27200B84377 /* andrew.jpg */,
+				4EBAC8211B9DD27200B84377 /* mike.jpg */,
+				4EBAC8221B9DD27200B84377 /* agajucha.jpg */,
+				4EBAC8231B9DD27200B84377 /* simon.jpg */,
+				4EBAC8241B9DD27200B84377 /* bart.jpg */,
+				4EBAC8251B9DD27200B84377 /* aparcik.jpg */,
+				4EBAC8261B9DD27200B84377 /* bartosz.jpg */,
+				4EBAC8271B9DD27200B84377 /* blazej.jpg */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		4EBAC8351B9DD28D00B84377 /* Hexagon Grid */ = {
+			isa = PBXGroup;
+			children = (
+				4EBAC8321B9DD28500B84377 /* HexagonGrid.h */,
+				4EBAC8331B9DD28500B84377 /* HexagonGrid.m */,
+			);
+			name = "Hexagon Grid";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,9 +263,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EBAC82B1B9DD27200B84377 /* mike.jpg in Resources */,
+				4EBAC82D1B9DD27200B84377 /* simon.jpg in Resources */,
+				4EBAC82A1B9DD27200B84377 /* andrew.jpg in Resources */,
 				4EBAC8031B9DD1F000B84377 /* Main.storyboard in Resources */,
 				4EBAC8081B9DD1F000B84377 /* LaunchScreen.xib in Resources */,
 				4EBAC8051B9DD1F000B84377 /* Images.xcassets in Resources */,
+				4EBAC82E1B9DD27200B84377 /* bart.jpg in Resources */,
+				4EBAC8301B9DD27200B84377 /* bartosz.jpg in Resources */,
+				4EBAC8291B9DD27200B84377 /* antonio.jpg in Resources */,
+				4EBAC8281B9DD27200B84377 /* janposz.jpg in Resources */,
+				4EBAC82C1B9DD27200B84377 /* agajucha.jpg in Resources */,
+				4EBAC82F1B9DD27200B84377 /* aparcik.jpg in Resources */,
+				4EBAC8311B9DD27200B84377 /* blazej.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,8 +293,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EBAC8341B9DD28500B84377 /* HexagonGrid.m in Sources */,
 				4EBAC8001B9DD1F000B84377 /* ViewController.m in Sources */,
 				4EBAC7FD1B9DD1F000B84377 /* AppDelegate.m in Sources */,
+				4EB7B54D1B9E14E100AE62E2 /* PortaitImageView.m in Sources */,
 				4EBAC7FA1B9DD1F000B84377 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,6 +492,7 @@
 				4EBAC8191B9DD1F000B84377 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4EBAC81A1B9DD1F000B84377 /* Build configuration list for PBXNativeTarget "HexagonGridWithAnimationsTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +501,7 @@
 				4EBAC81C1B9DD1F000B84377 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
