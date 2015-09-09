@@ -13,11 +13,10 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *drawingView;
 @property (nonatomic, strong) HexagonGrid *hexGrid;
 @property (nonatomic, strong) UIDynamicAnimator *animator;
 @property (nonatomic, strong) UIAttachmentBehavior *attachment;
-@property (nonatomic, strong) NSMutableArray *snapBehaviors;
-@property (nonatomic, strong) UIDynamicItemBehavior *dynamicBehavior;
 @property (nonatomic, strong) PortaitImageView *mainView;
 @property (nonatomic, strong) PortaitImageView *draggedView;
 @property (nonatomic, assign) BOOL draggingView;
@@ -42,30 +41,34 @@ static const CGFloat kInitialVelocity = 0.1;
 -(UIDynamicAnimator *)animator
 {
     if (!_animator) {
-        _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+        _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.drawingView];
     }
     return _animator;
-}
-
-- (UIDynamicItemBehavior *)dynamicBehavior
-{
-    if (!_dynamicBehavior) {
-        _dynamicBehavior = [[UIDynamicItemBehavior alloc] init];
-        _dynamicBehavior.allowsRotation = NO;
-        _dynamicBehavior.friction = 100;
-        _dynamicBehavior.resistance = 0;
-        [self.animator addBehavior:_dynamicBehavior];
-    }
-    return _dynamicBehavior;
 }
 
 #pragma mark - VC's Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib
-    self.snapBehaviors = [[NSMutableArray alloc] init];
     
+    // Add tapGestureRecognizer to self.drawingView
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    tapRecognizer.numberOfTapsRequired = 2;
+    tapRecognizer.numberOfTouchesRequired = 1;
+    [self.drawingView addGestureRecognizer:tapRecognizer];
+    
+    // Add motion effects
+    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(-50);
+    horizontalMotionEffect.maximumRelativeValue = @(50);
+    
+    UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(-50);
+    verticalMotionEffect.maximumRelativeValue = @(50);
+    
+    UIMotionEffectGroup *group = [UIMotionEffectGroup new];
+    group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+    [self.drawingView addMotionEffect:group];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -80,7 +83,7 @@ static const CGFloat kInitialVelocity = 0.1;
     self.hexGrid.surroundingViewRadius = 25;
     self.hexGrid.offsetBetweeenViews = 15;
     // Set required parameters
-    self.hexGrid.viewFrame = self.view.frame;
+    self.hexGrid.viewFrame = self.drawingView.frame;
     self.hexGrid.numberOfViews = kNumberOfViews;
     
     // Produce UIViews
@@ -96,14 +99,6 @@ static const CGFloat kInitialVelocity = 0.1;
     // Take frame from grid
     CGRect aFrame = [self.hexGrid frameOfViewAtIndex:i.intValue];
     
-    // RectView
-    //RectView *newView = [[RectView alloc] initWithFrame:aFrame];
-    //newView.backgroundColor = [UIColor clearColor];
-    
-    // RoundView
-    //RoundView *newView = [[RoundView alloc] initWithFrame:aFrame];
-    //newView.backgroundColor = [UIColor clearColor];
-    
     // Image View
     PortaitImageView *newView = [[PortaitImageView alloc] initWithFrame:aFrame];
     int randNum = arc4random() % 10;
@@ -113,12 +108,13 @@ static const CGFloat kInitialVelocity = 0.1;
     newView.layer.cornerRadius = i.intValue == 0 ? self.hexGrid.mainViewRadius : self.hexGrid.surroundingViewRadius;
     newView.layer.masksToBounds = YES;
     newView.layerNumber = [self.hexGrid layerOfViewAtIndex:i.intValue];
+    [self.drawingView addSubview:newView];
     
-    [self.view addSubview:newView];
-    [UIView animateWithDuration:0.5
+    // Animate View
+    [UIView animateWithDuration:0.4
                           delay:0
-         usingSpringWithDamping:0.3
-          initialSpringVelocity:0.5
+         usingSpringWithDamping:0.5
+          initialSpringVelocity:0.2
                         options:0
                      animations:^{
                             CGFloat newWidth = newView.frame.size.width * 1.1;
@@ -134,28 +130,18 @@ static const CGFloat kInitialVelocity = 0.1;
     if (i.intValue == 0) {
         self.mainView = newView;
         self.mainView.userInteractionEnabled = YES;
-        self.mainView.offsetFromMainView = CGPointMake(0, 0);
-        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        [self.mainView addGestureRecognizer:panRecognizer];
-        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-        tapRecognizer.numberOfTapsRequired = 2;
-        tapRecognizer.numberOfTouchesRequired = 1;
-        [self.mainView addGestureRecognizer:tapRecognizer];
+        self.mainView.offsetFromMainView = CGPointZero;
+        
     } else {
         CGFloat xOffset = newView.center.x - self.mainView.center.x;
         CGFloat yOffset = newView.center.y - self.mainView.center.y;
         newView.offsetFromMainView = CGPointMake(xOffset, yOffset);
-        //UIAttachmentBehavior *attach = [[UIAttachmentBehavior alloc] initWithItem:newView attachedToItem:self.mainView];
-        //attach.damping = 0.5;
-        //attach.frequency = 5;
-        //UISnapBehavior *snapBehavior = [UISnapBehavior alloc] init
-        
-        //[self.dynamicBehavior addItem:newView];
-        //[self.animator addBehavior:attach];
-        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        newView.userInteractionEnabled = YES;
-        [newView addGestureRecognizer:panRecognizer];
+    
     }
+    // Add panGestureRecognizer to the View
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    newView.userInteractionEnabled = YES;
+    [newView addGestureRecognizer:panRecognizer];
 }
 
 - (NSArray *)VORMTeamImages
@@ -163,70 +149,33 @@ static const CGFloat kInitialVelocity = 0.1;
     return @[@"janposz.jpg", @"antonio.jpg", @"andrew.jpg", @"mike.jpg", @"agajucha.jpg", @"simon.jpg", @"bart.jpg", @"aparcik.jpg", @"bartosz.jpg", @"blazej.jpg"];
 }
 
+#pragma mark - Gesture Recognizers
+
 - (void)handleTap:(UITapGestureRecognizer *)gesture
 {
-    CGPoint touchPoint = [gesture locationInView:self.view];
-    UIView* draggedView = gesture.view;
-//    PortaitImageView *pTappedView = (PortaitImageView *)draggedView;
-//    
-//    //Calculate offset
-//    for (UIView *aView in self.view.subviews) {
-//        if ([aView isKindOfClass:[PortaitImageView class]]) {
-//            PortaitImageView *pView = (PortaitImageView *)aView;
-//            CGFloat xOffset = pView.center.x - pTappedView.center.x;
-//            CGFloat yOffset = pView.center.y - pTappedView.center.y;
-//            pView.offsetFromMainView = CGPointMake(xOffset, yOffset);
-//        }
-//    }
-    
-    
-//    [UIView animateWithDuration:0.5
-//                          delay:0
-//         usingSpringWithDamping:0.3
-//          initialSpringVelocity:0.5
-//                        options:0
-//                     animations:^{
-//                         self.mainView.center = self.view.center;
-//                     }
-//                     completion:nil];
-    
-    //[self.animator removeAllBehaviors];
-    //[self.snapBehaviors removeAllObjects];
-    //self.attachment = [[UIAttachmentBehavior alloc] initWithItem:draggedView attachedToAnchor:touchPoint];
-    //[self.animator addBehavior:self.attachment];
-//    for (UIView *aView in self.view.subviews) {
-//        if ([aView isKindOfClass:[PortaitImageView class]]) {
-//            PortaitImageView *pView = (PortaitImageView *)aView;
-//            CGPoint finalPoint = CGPointMake(self.mainView.center.x+pView.offsetFromMainView.x, self.mainView.center.y+pView.offsetFromMainView.y);
-//            UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:pView snapToPoint:finalPoint];
-//            snapBehavior.damping = 0.3;
-//            [self.snapBehaviors addObject:snapBehavior];
-//            [self.animator addBehavior:snapBehavior];
-//        }
-//    }
+    //CGPoint touchPoint = [gesture locationInView:self.drawingView];
+    //UIView* draggedView = gesture.view;
+
+    // Move all views to the default position when tapped twice on the screen
     int i = 0;
-    for (UIView *aView in self.view.subviews) {
+    for (UIView *aView in self.drawingView.subviews) {
         if ([aView isKindOfClass:[PortaitImageView class]]) {
             PortaitImageView *pView = (PortaitImageView *)aView;
-            //UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:pView snapToPoint:finalPoint];
-            //snapBehavior.damping = 0.7;
-            //[self.snapBehaviors addObject:snapBehavior];
-            //[self.animator addBehavior:snapBehavior];
             [self performSelector:@selector(animateViewToCenter:) withObject:pView afterDelay:0.15*pView.layerNumber];
             
         }
         i++;
     }
-    
 }
 
+// Move all views according to dragged view's position while panning
 -(void)handlePan:(UIPanGestureRecognizer *)gesture
 {
-    CGPoint touchPoint = [gesture locationInView:self.view];
+    CGPoint touchPoint = [gesture locationInView:self.drawingView];
     UIView* draggedView = gesture.view;
     self.draggedView = (PortaitImageView *)draggedView;
     
-    self.offset = CGPointMake(touchPoint.x-(self.view.center.x+self.draggedView.offsetFromMainView.x), touchPoint.y-(self.view.center.y+self.draggedView.offsetFromMainView.y));
+    self.offset = CGPointMake(touchPoint.x-(self.drawingView.center.x+self.draggedView.offsetFromMainView.x), touchPoint.y-(self.drawingView.center.y+self.draggedView.offsetFromMainView.y));
 
     if (gesture.state == UIGestureRecognizerStateBegan) {
         [self.animator removeAllBehaviors];
@@ -237,7 +186,7 @@ static const CGFloat kInitialVelocity = 0.1;
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
         [self.attachment setAnchorPoint:touchPoint];
         int i = 0;
-        for (UIView *aView in self.view.subviews) {
+        for (UIView *aView in self.drawingView.subviews) {
             if ([aView isKindOfClass:[PortaitImageView class]]) {
                 PortaitImageView *pView = (PortaitImageView *)aView;
                 if (pView != self.draggedView) {
@@ -251,7 +200,7 @@ static const CGFloat kInitialVelocity = 0.1;
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
         [self.attachment setAnchorPoint:touchPoint];
         int i = 0;
-        for (UIView *aView in self.view.subviews) {
+        for (UIView *aView in self.drawingView.subviews) {
             if ([aView isKindOfClass:[PortaitImageView class]]) {
                 PortaitImageView *pView = (PortaitImageView *)aView;
                 [self performSelector:@selector(animateView:) withObject:pView afterDelay:(double)i/kDelayDivider];
@@ -263,9 +212,11 @@ static const CGFloat kInitialVelocity = 0.1;
     }
 }
 
+#pragma mark - Views' animations
+
 - (void)animateView:(PortaitImageView *)pView
 {
-    CGPoint pointToMove = pointToMove = CGPointMake(self.view.center.x+pView.offsetFromMainView.x+self.offset.x, self.view.center.y+pView.offsetFromMainView.y+self.offset.y);
+    CGPoint pointToMove = pointToMove = CGPointMake(self.drawingView.center.x+pView.offsetFromMainView.x+self.offset.x, self.drawingView.center.y+pView.offsetFromMainView.y+self.offset.y);
         
         [UIView animateWithDuration:kAnimationDuration
                               delay:kAnimationDelay
@@ -286,7 +237,7 @@ static const CGFloat kInitialVelocity = 0.1;
           initialSpringVelocity:kInitialVelocity
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-        pView.center = CGPointMake(self.view.center.x+pView.offsetFromMainView.x, self.view.center.y+pView.offsetFromMainView.y);
+        pView.center = CGPointMake(self.drawingView.center.x+pView.offsetFromMainView.x, self.drawingView.center.y+pView.offsetFromMainView.y);
     }
                      completion:nil];
 }
